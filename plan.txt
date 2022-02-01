@@ -1,0 +1,82 @@
+Cook Book API (node,express,postgresql,jwt)
+    full authentication
+        register new users
+        log in existing users
+    full authorization
+        protected api routes
+        jwt    
+
+Users can:
+    -Login
+    -Get list of existing recipes
+    -Add new recipe
+        -Each recipe must contain a title, source, 
+            ingredients, instructions, category, and picture url(stretch).
+    -Edit/Delete existing recipes
+    -see other users recipes with an invitation link(stretch)
+
+API Routes:
+
+    Users:
+        [GET]:      Get all users           /api/users              protected           testing
+        [GET]:      Get user by ID          /api/:id/users          protected           testing
+        [POST]:     Register Users          /api/register               -                  - 
+        [POST]:     Login Users             /api/login                  -                  -
+
+    Recipes:
+        [GET]:      All recipes             /api/recipes            protected
+        [POST]:     Create new recipe       /api/recipes            protected
+        [PUT]:      Edit recipe             /api/recipes            protected
+        [DELETE]:   Delete recipe           /api/recipes            protected
+        [GET]:      Get recipe by ID        /api/:id/recipes        protected
+
+Database:
+
+    USERS
+    id  username    first_name      last_name       password
+    1   john123        john            doe             123            
+    2   jane123        jane            doe             123            
+
+    RECIPES
+    id  title               source              pic_url                     category        user_id(fk) 
+    1   grilled cheese      family recipe       http://test.io/pic/...      snack           1          
+    2   quesadilla          online              http://test.io/pic/...      lunch           1          
+    3   ramen               online              http://test.io/pic/...      lunch           2          
+
+    INSTRUCTIONS
+    id  instruction_number      instruction                             recipe_id(fk)
+    1   1                       heat pan                                1
+    2   2                       butter bread                            1
+    3   3                       add cheese & finish                     1
+    4   1                       add cheese on top of tortilla           2
+    5   2                       microwave for 30 seconds                2
+    6   1                       boil ramen                              3
+    7   2                       eat it                                  3   
+
+    INGREDIENTS
+    id  ingredient 
+    1   bread
+    2   cheese
+    3   butter
+    4   tortilla
+    5   ramen
+
+    INSTRUCTIONS_INGREDIENTS
+    instructions_id(fk)     ingredients_id(fk)
+    2                       1
+    2                       3
+    3                       2
+    4                       2
+    4                       4
+    6                       5
+
+USERS to RECIPES                1:*
+RECIPES to INSTRUCTIONS         1:*
+INSTRUCTIONS to INGREDIENTS     *:*
+
+express
+nodemon
+postgresql
+jwt
+bcrypt
+jest
