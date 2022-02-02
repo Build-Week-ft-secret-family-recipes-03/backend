@@ -42,6 +42,8 @@ router.post("/login", async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+
+  // [GET] /api
 });
 
 module.exports = router;
