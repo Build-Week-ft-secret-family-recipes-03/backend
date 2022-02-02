@@ -6,13 +6,15 @@ const tokenBuilder = require("./auth-token-builder");
 // [POST] /api/register - Register New User
 router.post("/register", async (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { first_name, last_name, username, password } = req.body;
 
     if (!username || !password) {
       res.json({ message: "Please fill both username and password." });
     } else {
       const hashPassword = bcrypt.hashSync(password, 8);
       const insertedUser = await Users.insertUser({
+        first_name,
+        last_name,
         username,
         password: hashPassword,
       });
