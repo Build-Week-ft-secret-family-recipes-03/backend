@@ -30,7 +30,9 @@ router.post("/login", async (req, res, next) => {
     const { username, password } = req.body;
     const [user] = await Users.findBy({ username });
 
-    if (user && bcrypt.compareSync(password, user.password)) {
+    if (!username || !password) {
+      res.json({ message: "Username or password empty." });
+    } else if (user && bcrypt.compareSync(password, user.password)) {
       const token = tokenBuilder(user);
 
       res.status(200).json({ user, token });
