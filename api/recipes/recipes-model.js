@@ -1,7 +1,7 @@
 const db = require("../../data/db-config");
 
-module.exports = {
-  get,
+const findRecipesBy = () => {
+  return db("recipes");
 };
 
 function get(id) {
@@ -13,3 +13,8 @@ function get(id) {
     return query;
   }
 }
+
+module.exports = {
+  get,
+  findRecipesBy,
+};
