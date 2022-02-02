@@ -1,7 +1,4 @@
 const router = require("express").Router();
-<<<<<<< HEAD
-const recipeResource = require("./recipes-model");
-=======
 const Recipes = require("../recipes/recipes-model");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
@@ -14,11 +11,12 @@ router.post("/", async (req, res, next) => {
     if (!token) {
       next({ status: 401, message: "Token Required." });
     } else {
-      jwt.verify(token, JWT_SECRET, (err, decoded) => {
+      jwt.verify(token, JWT_SECRET, async (err, decoded) => {
         if (err) {
           next({ status: 401, message: "Token Invalid." });
         } else {
-          res.json(decoded);
+          const returned = await Recipes.findRecipesByUser(decoded.username);
+          res.json(returned);
         }
       });
     }
@@ -26,11 +24,10 @@ router.post("/", async (req, res, next) => {
     next(err);
   }
 });
->>>>>>> main
 
 router.get("/", async (req, res) => {
   try {
-    const data = await recipeResource.get(req.params.id);
+    const data = await Recipes.get(req.params.id);
     res.send(data);
   } catch (err) {
     res.send(err.message);
