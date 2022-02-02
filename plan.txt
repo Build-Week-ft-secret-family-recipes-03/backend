@@ -31,7 +31,6 @@ API Routes:
         [GET]:      Get recipe by ID        /api/:id/recipes        protected
 
 Database:
-
     USERS
     id  username    first_name      last_name       password
     1   john123        john            doe             123            
