@@ -1,7 +1,7 @@
 const router = require("express").Router();
-<<<<<<< HEAD
+
 const recipeResource = require("./recipes-model");
-=======
+
 const Recipes = require("../recipes/recipes-model");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
@@ -26,7 +26,6 @@ router.post("/", async (req, res, next) => {
     next(err);
   }
 });
->>>>>>> main
 
 router.get("/", async (req, res) => {
   try {

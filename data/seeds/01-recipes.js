@@ -1,10 +1,11 @@
 exports.seed = function (knex) {
-  return knex("projects").insert([
+  return knex("recipes").insert([
     {
-      project_id: 1,
-      project_name: "bar",
-      project_description: null,
-      project_completed: false,
+      recipe_1: 1,
+      recipe_name: "Meatballs",
+      instructions: "take ground meat and add pasta sauce",
+      ingredients: "ground beef and pasta sauce",
+      category: "Meat lovers",
     },
   ]);
 };
