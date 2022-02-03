@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const { PG_CONNECTION_STRING } = process.env;
+const { DATABASE_URL } = process.env;
 
 const sharedConfig = {
   client: "pg",
@@ -13,16 +13,16 @@ const sharedConfig = {
 module.exports = {
   development: {
     ...sharedConfig,
-    connection: PG_CONNECTION_STRING,
+    connection: DATABASE_URL,
   },
 
   testing: {
     ...sharedConfig,
-    connection: PG_CONNECTION_STRING,
+    connection: DATABASE_URL,
   },
 
   production: {
     ...sharedConfig,
-    connection: PG_CONNECTION_STRING,
+    connection: DATABASE_URL,
   },
 };
