@@ -21,19 +21,19 @@ module.exports = {
     },
   },
 
-  // testing: {
-  //   ...sharedConfig,
-  //   connection: {
-  //     connectionString: DATABASE_URL || PG_CONNECTION_STRING,
-  //     // ssl: { rejectUnauthorized: false },
-  //   },
-  // },
+  testing: {
+    ...sharedConfig,
+    connection: {
+      connectionString: DATABASE_URL || PG_CONNECTION_STRING,
+      ssl: { rejectUnauthorized: false },
+    },
+  },
 
-  // production: {
-  //   ...sharedConfig,
-  //   connection: {
-  //     connectionString: DATABASE_URL || PG_CONNECTION_STRING,
-  //     // ssl: { rejectUnauthorized: false },
-  //   },
-  // },
+  production: {
+    ...sharedConfig,
+    connection: {
+      connectionString: DATABASE_URL || PG_CONNECTION_STRING,
+      ssl: { rejectUnauthorized: false },
+    },
+  },
 };
