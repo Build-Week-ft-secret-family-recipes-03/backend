@@ -8,24 +8,30 @@ const sharedConfig = {
     directory: "./data/migrations",
   },
   seeds: { directory: "./data/seeds" },
-  ssl: {
-    rejectUnauthorized: false,
-  },
 };
 
 module.exports = {
   development: {
     ...sharedConfig,
-    connection: DATABASE_URL,
+    connection: {
+      connectionString: DATABASE_URL,
+      ssl: { rejectUnauthorized: false },
+    },
   },
 
   testing: {
     ...sharedConfig,
-    connection: DATABASE_URL,
+    connection: {
+      connectionString: DATABASE_URL,
+      ssl: { rejectUnauthorized: false },
+    },
   },
 
   production: {
     ...sharedConfig,
-    connection: DATABASE_URL,
+    connection: {
+      connectionString: DATABASE_URL,
+      ssl: { rejectUnauthorized: false },
+    },
   },
 };
