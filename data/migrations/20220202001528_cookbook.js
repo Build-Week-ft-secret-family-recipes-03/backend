@@ -28,6 +28,12 @@ exports.up = (knex) =>
       tbl.increments();
       tbl.integer("instruction_number").notNullable();
       tbl.text("instruction").notNullable();
+    })
+    .createTable("ingredients", (tbl) => {
+      tbl.increments();
+      tbl.string("ingredient").notNullable();
+    })
+    .createTable("recipes_instructions", (tbl) => {
       tbl
         .integer("recipe_id")
         .unsigned()
@@ -38,18 +44,26 @@ exports.up = (knex) =>
         .onUpdate("RESTRICT")
         .onDelete("RESTRICT");
         */
-    })
-    .createTable("ingredients", (tbl) => {
-      tbl.increments();
-      tbl.string("ingredient").notNullable();
-    })
-    .createTable("instructions_ingredients", (tbl) => {
       tbl
         .integer("instruction_id")
         .unsigned()
         .notNullable()
         .references("id")
         .inTable("instructions");
+      /*
+        .onUpdate("RESTRICT")
+        .onDelete("RESTRICT");
+        */
+
+      tbl.primary(["recipe_id", "instruction_id"]);
+    })
+    .createTable("recipes_ingredients", (tbl) => {
+      tbl
+        .integer("recipe_id")
+        .unsigned()
+        .notNullable()
+        .references("id")
+        .inTable("recipes");
       /*
         .onUpdate("RESTRICT")
         .onDelete("RESTRICT");
@@ -65,12 +79,13 @@ exports.up = (knex) =>
         .onDelete("RESTRICT");
         */
 
-      tbl.primary(["instruction_id", "ingredient_id"]);
+      tbl.primary(["recipe_id", "ingredient_id"]);
     });
 
 exports.down = function (knex) {
   return knex.schema
-    .dropTableIfExists("instructions_ingredients")
+    .dropTableIfExists("recipes_ingredients")
+    .dropTableIfExists("recipes_instructions")
     .dropTableIfExists("ingredients")
     .dropTableIfExists("instructions")
     .dropTableIfExists("recipes")

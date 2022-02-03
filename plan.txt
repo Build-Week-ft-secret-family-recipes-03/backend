@@ -43,14 +43,14 @@ Database:
     3   ramen               online              http://test.io/pic/...      lunch           2          
 
     INSTRUCTIONS
-    id  instruction_number      instruction                             recipe_id(fk)
-    1   1                       heat pan                                1
-    2   2                       butter bread                            1
-    3   3                       add cheese & finish                     1
-    4   1                       add cheese on top of tortilla           2
-    5   2                       microwave for 30 seconds                2
-    6   1                       boil ramen                              3
-    7   2                       eat it                                  3   
+    id  instruction_number      instruction                             
+    1   1                       heat pan                                
+    2   2                       butter bread                            
+    3   3                       add cheese & finish                     
+    4   1                       add cheese on top of tortilla           
+    5   2                       microwave for 30 seconds                
+    6   1                       boil ramen                              
+    7   2                       eat it                                  
 
     INGREDIENTS
     id  ingredient 
@@ -60,18 +60,28 @@ Database:
     4   tortilla
     5   ramen
 
-    INSTRUCTIONS_INGREDIENTS
-    instructions_id(fk)     ingredients_id(fk)
-    2                       1
-    2                       3
-    3                       2
-    4                       2
-    4                       4
-    6                       5
+    RECIPES_INSTRUCTIONS
+    recipe_id(fk)       instruction_id(fk)
+    1                   1
+    1                   2
+    1                   3
+    2                   4
+    2                   5
+    3                   6
+    3                   7 
 
-USERS to RECIPES                1:*
-RECIPES to INSTRUCTIONS         1:*
-INSTRUCTIONS to INGREDIENTS     *:*
+    RECIPES_INGREDIENTS
+    recipe_id(fk)       ingredient_id(fk)
+    1                   1
+    1                   2
+    1                   3
+    2                   4
+    2                   3
+    3                   5
+
+USERS to RECIPES                1:n
+RECIPES to INSTRUCTIONS         n:m
+RECIPES to INGREDIENTS          n:m
 
 express
 nodemon
