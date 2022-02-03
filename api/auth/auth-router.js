@@ -8,8 +8,8 @@ router.post("/register", async (req, res, next) => {
   try {
     const { first_name, last_name, username, password } = req.body;
 
-    if (!username || !password) {
-      res.json({ message: "Please fill both username and password." });
+    if (!first_name || !last_name || !username || !password) {
+      next({ status: 400, message: "Please make sure all inputs are filled." });
     } else {
       const hashPassword = bcrypt.hashSync(password, 8);
       const insertedUser = await Users.insertUser({
@@ -19,7 +19,7 @@ router.post("/register", async (req, res, next) => {
         password: hashPassword,
       });
 
-      res.json(insertedUser[0]);
+      res.status(200).json(insertedUser[0]);
     }
   } catch (err) {
     next(err);
@@ -33,19 +33,17 @@ router.post("/login", async (req, res, next) => {
     const [user] = await Users.findBy({ username });
 
     if (!username || !password) {
-      res.json({ message: "Username or password empty." });
+      next({ status: 400, message: "Please make sure all inputs are filled." });
     } else if (user && bcrypt.compareSync(password, user.password)) {
       const token = tokenBuilder(user);
 
       res.status(200).json({ user, token });
     } else {
-      res.status(401).json({ message: "Invalid credentials." });
+      next({ status: 400, message: "Invalid Credentials." });
     }
   } catch (err) {
     next(err);
   }
-
-  // [GET] /api
 });
 
 module.exports = router;

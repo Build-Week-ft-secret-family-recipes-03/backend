@@ -3,6 +3,7 @@ const db = require("../../data/db-config");
 const findRecipesByUser = async (username) => {
   return db("recipes_ingredients")
     .select(
+      "recipe_id",
       "recipes.title",
       "users.username",
       "recipes.source",
@@ -25,17 +26,11 @@ const findRecipesByUser = async (username) => {
     .where({ username });
 };
 
-function get(id) {
-  let query = db("recipes");
-
-  if (id) {
-    return query.where("project_id", id).first();
-  } else {
-    return query;
-  }
-}
+const createRecipe = async (rest, ingredientsArr) => {
+  return db("recipes").insert(rest);
+};
 
 module.exports = {
-  get,
   findRecipesByUser,
+  createRecipe,
 };

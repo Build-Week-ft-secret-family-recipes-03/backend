@@ -1,5 +1,5 @@
-exports.up = (knex) =>
-  knex.schema
+exports.up = (knex) => {
+  return knex.schema
     .createTable("users", (tbl) => {
       tbl.increments();
       tbl.string("first_name", 128).notNullable();
@@ -19,10 +19,6 @@ exports.up = (knex) =>
         .notNullable()
         .references("id")
         .inTable("users");
-      /*
-        .onUpdate("RESTRICT")
-        .onDelete("RESTRICT");
-        */
     })
     .createTable("instructions", (tbl) => {
       tbl.increments();
@@ -40,20 +36,12 @@ exports.up = (knex) =>
         .notNullable()
         .references("id")
         .inTable("recipes");
-      /*
-        .onUpdate("RESTRICT")
-        .onDelete("RESTRICT");
-        */
       tbl
         .integer("instruction_id")
         .unsigned()
         .notNullable()
         .references("id")
         .inTable("instructions");
-      /*
-        .onUpdate("RESTRICT")
-        .onDelete("RESTRICT");
-        */
 
       tbl.primary(["recipe_id", "instruction_id"]);
     })
@@ -64,24 +52,16 @@ exports.up = (knex) =>
         .notNullable()
         .references("id")
         .inTable("recipes");
-      /*
-        .onUpdate("RESTRICT")
-        .onDelete("RESTRICT");
-        */
       tbl
         .integer("ingredient_id")
         .unsigned()
         .notNullable()
         .references("id")
         .inTable("ingredients");
-      /*
-        .onUpdate("RESTRICT")
-        .onDelete("RESTRICT");
-        */
 
       tbl.primary(["recipe_id", "ingredient_id"]);
     });
-
+};
 exports.down = function (knex) {
   return knex.schema
     .dropTableIfExists("recipes_ingredients")

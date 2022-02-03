@@ -16,7 +16,7 @@ router.post("/", async (req, res, next) => {
           next({ status: 401, message: "Token Invalid." });
         } else {
           const returned = await Recipes.findRecipesByUser(decoded.username);
-          res.json(returned);
+          res.status(200).json(returned);
         }
       });
     }
@@ -25,15 +25,35 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.get("/", async (req, res) => {
+// [POST] /api/recipes/create - Creates recipe
+router.post("/create", async (req, res, next) => {
   try {
-    const data = await Recipes.get(req.params.id);
-    res.send(data);
+    const { token } = req.body;
+
+    if (!token) {
+      next({ status: 401, message: "Token Required." });
+    } else {
+      jwt.verify(token, JWT_SECRET, async (err, decoded) => {
+        if (err) {
+          next({ status: 401, message: "Token Invalid." });
+        } else {
+          const userID = decoded.id;
+          const { title, source, pic_url, category, ingredients } = req.body;
+          // const returned = await Recipes.findRecipesByID(req.params.id);
+          await Recipes.createRecipe({
+            title,
+            source,
+            pic_url,
+            category,
+            user_id: userID,
+          });
+          res.status(200).json(req.body);
+        }
+      });
+    }
   } catch (err) {
-    res.send(err.message);
+    next(err);
   }
 });
-
-router.get("/:id", async (req, res) => {});
 
 module.exports = router;
