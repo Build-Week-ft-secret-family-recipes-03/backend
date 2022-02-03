@@ -8,6 +8,9 @@ const sharedConfig = {
     directory: "./data/migrations",
   },
   seeds: { directory: "./data/seeds" },
+  ssl: {
+    rejectUnauthorized: false,
+  },
 };
 
 module.exports = {
