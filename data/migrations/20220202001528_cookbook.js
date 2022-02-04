@@ -18,7 +18,9 @@ exports.up = (knex) => {
         .unsigned()
         .notNullable()
         .references("id")
-        .inTable("users");
+        .inTable("users")
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
     })
     .createTable("instructions", (tbl) => {
       tbl.increments();
@@ -35,13 +37,17 @@ exports.up = (knex) => {
         .unsigned()
         .notNullable()
         .references("id")
-        .inTable("recipes");
+        .inTable("recipes")
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
       tbl
         .integer("instruction_id")
         .unsigned()
         .notNullable()
         .references("id")
-        .inTable("instructions");
+        .inTable("instructions")
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
 
       tbl.primary(["recipe_id", "instruction_id"]);
     })
@@ -51,13 +57,17 @@ exports.up = (knex) => {
         .unsigned()
         .notNullable()
         .references("id")
-        .inTable("recipes");
+        .inTable("recipes")
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
       tbl
         .integer("ingredient_id")
         .unsigned()
         .notNullable()
         .references("id")
-        .inTable("ingredients");
+        .inTable("ingredients")
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
 
       tbl.primary(["recipe_id", "ingredient_id"]);
     });

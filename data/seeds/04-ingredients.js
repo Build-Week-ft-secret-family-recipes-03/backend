@@ -15,6 +15,7 @@ exports.seed = function (knex) {
         { ingredient: "butter" },
         { ingredient: "tortilla" },
         { ingredient: "ramen" },
+        { ingredient: "cheese" },
       ]);
     });
 };
