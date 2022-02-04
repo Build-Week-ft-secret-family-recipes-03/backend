@@ -19,6 +19,13 @@ Implements a full authentication/authorization system along with endpoints to pr
 
 ## API Endpoints
 
+There are two users in the database for testing.
+
+```
+username:  johndoe123, password: 123
+username:  janedoe123, password: 123
+```
+
 #### [GET] /api/users
 
 Returns every user in the database.
@@ -110,10 +117,3 @@ Expects the exact same body that the create endpoint above expects.
 #### [DELETE] /api/recipes/delete/:id
 
 Expects body to have token for the users information.
-
-There are two users in the database for testing.
-
-```
-username:  johndoe123, password: 123
-username:  janedoe123, password: 123
-```
