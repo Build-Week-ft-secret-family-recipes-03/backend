@@ -17,7 +17,7 @@ module.exports = {
     ...sharedConfig,
     connection: {
       connectionString: DATABASE_URL || PG_CONNECTION_STRING,
-      // ssl: { rejectUnauthorized: false },
+      ssl: { rejectUnauthorized: false },
     },
   },
 
@@ -29,11 +29,11 @@ module.exports = {
   //   },
   // },
 
-  // production: {
-  //   ...sharedConfig,
-  //   connection: {
-  //     connectionString: DATABASE_URL || PG_CONNECTION_STRING,
-  //     ssl: { rejectUnauthorized: false },
-  //   },
-  // },
+  production: {
+    ...sharedConfig,
+    connection: {
+      connectionString: DATABASE_URL || PG_CONNECTION_STRING,
+      ssl: { rejectUnauthorized: false },
+    },
+  },
 };
