@@ -2,11 +2,11 @@
 
 ## Host - https://ft-secret-family-recipes.herokuapp.com/
 
-Backend API for Secret Family Recipes
+Backend API for Secret Family Recipes.
 
 ## Description
 
-Implements a full authentication/authorization system along with endpoints to produce each CRUD operation to a database
+Implements a full authentication/authorization system along with endpoints to produce each CRUD operation to a database.
 
 ### Stack
 
